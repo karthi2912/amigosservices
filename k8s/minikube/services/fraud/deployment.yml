@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fraud
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fraud
+  template:
+    metadata:
+      labels:
+        app: fraud
+    spec:
+      containers:
+        - name: fraud
+          image: karthi2912/fraud:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8081
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: kube
